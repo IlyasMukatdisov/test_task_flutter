@@ -19,7 +19,10 @@ class FeaturedItem extends StatelessWidget {
       onTap: () {
         Navigator.of(context).pushNamed(
           ArticleDetailsScreen.routeName,
-          arguments: article,
+          arguments: {
+            'article': article,
+            'isLatestClicked': false,
+          },
         );
       },
       child: SizedBox(
@@ -31,7 +34,7 @@ class FeaturedItem extends StatelessWidget {
               left: 0,
               top: 0,
               child: Hero(
-                tag: article.id,
+                tag: "${article.id}featured",
                 child: Container(
                   width: itemWidth,
                   height: 300,
@@ -39,24 +42,14 @@ class FeaturedItem extends StatelessWidget {
                     image: DecorationImage(
                       image: NetworkImage(article.imageUrl),
                       fit: BoxFit.cover,
+                      colorFilter: ColorFilter.mode(
+                        Colors.black.withOpacity(0.699999988079071),
+                        BlendMode.darken,
+                      ),
                     ),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
-                  ),
-                ),
-              ),
-            ),
-            Positioned(
-              left: 0,
-              top: 0,
-              child: Container(
-                width: itemWidth,
-                height: 300,
-                decoration: ShapeDecoration(
-                  color: Colors.black.withOpacity(0.699999988079071),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
                   ),
                 ),
               ),

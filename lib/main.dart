@@ -30,9 +30,11 @@ class ForestVPNTestApp extends StatelessWidget {
         switch (settings.name) {
           case ArticleDetailsScreen.routeName:
             {
+              final arguments = settings.arguments as Map<String, dynamic>;
               return MaterialPageRoute(
                 builder: (context) => ArticleDetailsScreen(
-                  article: settings.arguments as Article,
+                  article: arguments['article'],
+                  isLatestClicked: arguments['isLatestClicked'],
                 ),
               );
             }

@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:forestvpn_test/presentation/styles/styles.dart';
 import 'package:forestvpn_test/presentation/widgets/featured_item.dart';
 import 'package:forestvpn_test/presentation/widgets/latest_arctice_item.dart';
-import 'package:forestvpn_test/repositories/news/mock_news_repository.dart';
+import 'package:forestvpn_test/repositories/news/repositories/mock_news_repository.dart';
 
 class LatestNewsSection extends ConsumerStatefulWidget {
   const LatestNewsSection({super.key});

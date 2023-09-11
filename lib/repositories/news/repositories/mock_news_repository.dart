@@ -1,5 +1,8 @@
+import 'package:flutter/material.dart' show debugPrint;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:forestvpn_test/repositories/news/repository.dart';
+import 'package:forestvpn_test/repositories/news/repositories/repository.dart';
+
+final mockNewsProvider = Provider((ref) => MockNewsRepository());
 
 final featuredArticlesRepositoryProvider = FutureProvider.autoDispose(
   (ref) async {
@@ -29,6 +32,26 @@ class MockNewsRepository implements AbstractNewsRepository {
   @override
   Future<Article> getArticle(String id) async {
     return _mockArticles.firstWhere((e) => e.id == id);
+  }
+
+  Future<bool> markRead(String id) async {
+    final index = _mockArticles.indexWhere((e) => e.id == id);
+    _mockArticles[index] = _mockArticles[index].copyWith(read: true);
+    return true;
+  }
+
+  Future<bool> markAllRead() async {
+    for (final article in _mockArticles) {
+      markRead(article.id);
+      debugPrint("Article with id:${article.id} marked as read");
+    }
+    return true;
+  }
+
+  void debugPrintReadStatus() {
+    for (final article in _mockArticles) {
+      debugPrint("Article with id:${article.id} is read: ${article.read}");
+    }
   }
 
   @override
