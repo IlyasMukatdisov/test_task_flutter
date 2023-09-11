@@ -60,29 +60,31 @@ class LatestArticleItem extends StatelessWidget {
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 23),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      width: 190,
-                      height: 38,
-                      child: Text(
-                        article.title,
-                        style: latestArticleTitleTextStyle,
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
+              Flexible(
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 23),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        width: 190,
+                        height: 38,
+                        child: Text(
+                          article.title,
+                          style: latestArticleTitleTextStyle,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                        ),
                       ),
-                    ),
-                    const SizedBox(
-                      height: 11,
-                    ),
-                    Text(
-                      "${DateTime.now().difference(article.publicationDate).inDays.toString()} day ago",
-                      style: latestArticleSubtitleTextStyle,
-                    ),
-                  ],
+                      const SizedBox(
+                        height: 11,
+                      ),
+                      Text(
+                        "${DateTime.now().difference(article.publicationDate).inDays.toString()} day ago",
+                        style: latestArticleSubtitleTextStyle,
+                      ),
+                    ],
+                  ),
                 ),
               )
             ],
@@ -90,33 +92,5 @@ class LatestArticleItem extends StatelessWidget {
         ),
       ),
     );
-
-    // return ListTile(
-    //   leading: ClipRRect(
-    //     borderRadius: BorderRadius.circular(12),
-    //     child: Image.network(
-    //       article.imageUrl,
-    //       width: 90,
-    //       height: 60,
-    //       fit: BoxFit.cover,
-    //     ),
-    //   ),
-    //   title: SizedBox(
-    //     width: 190,
-    //     child: Text(
-    //       article.title,
-    //       style: latestArticleTitleTextStyle,
-    //       maxLines: 2,
-    //       overflow: TextOverflow.ellipsis,
-    //     ),
-    //   ),
-    //   subtitle: Padding(
-    //     padding: const EdgeInsets.only(top: 10),
-    //     child: Text(
-    //       "${DateTime.now().difference(article.publicationDate).inDays.toString()} day ago",
-    //       style: latestArticleSubtitleTextStyle,
-    //     ),
-    //   ),
-    // );
   }
 }

@@ -13,7 +13,8 @@ class FeaturedItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const double itemWidth = 358;
+    final double screenWidth = MediaQuery.of(context).size.width;
+    double itemWidth = screenWidth < 358 ? screenWidth - 28 : 358;
 
     return InkWell(
       onTap: () {
