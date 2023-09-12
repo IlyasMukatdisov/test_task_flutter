@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:forestvpn_test/presentation/screens/article_details_screen.dart';
 import 'package:forestvpn_test/presentation/screens/home_screen.dart';
-import 'package:forestvpn_test/repositories/news/models/article.dart';
 
 void main() {
   runApp(const ProviderScope(child: ForestVPNTestApp()));

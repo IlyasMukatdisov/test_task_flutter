@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:forestvpn_test/presentation/providers/featured_news_provider.dart';
@@ -17,7 +18,7 @@ class FeaturedItem extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final double screenWidth = MediaQuery.of(context).size.width;
-    double itemWidth = screenWidth < 358 ? screenWidth - 28 : 358;
+    double itemWidth = screenWidth - 76;
 
     return InkWell(
       onTap: () {
@@ -31,7 +32,8 @@ class FeaturedItem extends ConsumerWidget {
           },
         );
       },
-      child: SizedBox(
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 10),
         width: itemWidth,
         height: 300,
         child: Stack(
@@ -41,21 +43,20 @@ class FeaturedItem extends ConsumerWidget {
               top: 0,
               child: Hero(
                 tag: "${article.id}featured",
-                child: Container(
-                  width: itemWidth,
-                  height: 300,
-                  decoration: ShapeDecoration(
-                    image: DecorationImage(
-                      image: NetworkImage(article.imageUrl),
-                      fit: BoxFit.cover,
-                      colorFilter: ColorFilter.mode(
-                        Colors.black.withOpacity(0.699999988079071),
-                        BlendMode.darken,
-                      ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(
+                    12,
+                  ),
+                  child: CachedNetworkImage(
+                    placeholder: (context, url) => Container(
+                      decoration: BoxDecoration(color: Colors.grey[400]),
                     ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
+                    imageUrl: article.imageUrl,
+                    width: itemWidth,
+                    height: 300,
+                    fit: BoxFit.cover,
+                    color: Colors.black.withOpacity(0.699999988079071),
+                    colorBlendMode: BlendMode.darken,
                   ),
                 ),
               ),

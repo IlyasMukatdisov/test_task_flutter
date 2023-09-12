@@ -1,10 +1,10 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:forestvpn_test/presentation/providers/featured_news_provider.dart';
 import 'package:forestvpn_test/presentation/providers/latest_news_provider.dart';
 import 'package:forestvpn_test/presentation/screens/article_details_screen.dart';
 import 'package:forestvpn_test/presentation/styles/styles.dart';
-import 'package:forestvpn_test/repositories/news/models/article.dart';
 
 class LatestArticleItem extends ConsumerWidget {
   final String id;
@@ -52,17 +52,18 @@ class LatestArticleItem extends ConsumerWidget {
             children: [
               Hero(
                 tag: "${article.id}latest",
-                child: Container(
-                  width: 90,
-                  height: 60,
-                  decoration: ShapeDecoration(
-                    image: DecorationImage(
-                      image: NetworkImage(article.imageUrl),
-                      fit: BoxFit.cover,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(12),
+                  child: CachedNetworkImage(
+                    placeholder: (context, url) => Container(
+                      decoration: BoxDecoration(
+                        color: Colors.grey[400]
+                      ),
                     ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
+                    imageUrl: article.imageUrl,
+                    width: 90,
+                    height: 60,
+                    fit: BoxFit.cover,
                   ),
                 ),
               ),

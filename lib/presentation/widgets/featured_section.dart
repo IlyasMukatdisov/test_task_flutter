@@ -28,24 +28,17 @@ class _FeaturedSectionState extends ConsumerState<FeaturedSection> {
       );
     }
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        SizedBox(
-          height: 300,
-          child: ListView.separated(
-            separatorBuilder: (context, index) => const SizedBox(width: 28),
-            scrollDirection: Axis.horizontal,
-            itemCount: featuredNews.length,
-            itemBuilder: (context, index) {
-              final item = featuredNews[index];
-              return FeaturedItem(
-                article: item,
-              );
-            },
-          ),
-        ),
-      ],
+    return SizedBox(
+      height: 300,
+      child: PageView.builder(
+        itemCount: featuredNews.length,
+        itemBuilder: (context, index) {
+          final item = featuredNews[index];
+          return FeaturedItem(
+            article: item,
+          );
+        },
+      ),
     );
   }
 }
