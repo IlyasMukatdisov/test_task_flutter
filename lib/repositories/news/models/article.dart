@@ -32,4 +32,26 @@ class Article {
       description: description ?? this.description,
     );
   }
+
+  @override
+  bool operator ==(covariant Article other) {
+    if (identical(this, other)) return true;
+
+    return other.id == id &&
+        other.title == title &&
+        other.publicationDate == publicationDate &&
+        other.imageUrl == imageUrl &&
+        other.read == read &&
+        other.description == description;
+  }
+
+  @override
+  int get hashCode {
+    return id.hashCode ^
+        title.hashCode ^
+        publicationDate.hashCode ^
+        imageUrl.hashCode ^
+        read.hashCode ^
+        description.hashCode;
+  }
 }

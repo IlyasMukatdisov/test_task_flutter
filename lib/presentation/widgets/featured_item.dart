@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:forestvpn_test/presentation/providers/featured_news_provider.dart';
+import 'package:forestvpn_test/presentation/providers/latest_news_provider.dart';
 import 'package:forestvpn_test/presentation/screens/article_details_screen.dart';
 import 'package:forestvpn_test/presentation/styles/styles.dart';
 import 'package:forestvpn_test/repositories/news/models/article.dart';
 
-class FeaturedItem extends StatelessWidget {
+class FeaturedItem extends ConsumerWidget {
   final Article article;
 
   const FeaturedItem({
@@ -12,12 +15,14 @@ class FeaturedItem extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final double screenWidth = MediaQuery.of(context).size.width;
     double itemWidth = screenWidth < 358 ? screenWidth - 28 : 358;
 
     return InkWell(
       onTap: () {
+        ref.read(latestNewsProvider.notifier).markRead(article.id);
+        ref.read(featuredNewsProvider.notifier).markRead(article.id);
         Navigator.of(context).pushNamed(
           ArticleDetailsScreen.routeName,
           arguments: {

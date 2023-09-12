@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:forestvpn_test/presentation/providers/featured_news_provider.dart';
+import 'package:forestvpn_test/presentation/providers/latest_news_provider.dart';
 import 'package:forestvpn_test/presentation/styles/styles.dart';
-import 'package:forestvpn_test/repositories/news/models/loading_state.dart';
-import 'package:forestvpn_test/repositories/news/providers/state_provider.dart';
 import 'package:forestvpn_test/repositories/news/repositories/mock_news_repository.dart';
 
 AppBar customAppBar() {
@@ -36,7 +36,8 @@ AppBar customAppBar() {
           builder: (context, ref, child) {
             return TextButton(
               onPressed: () {
-                ref.read(mockNewsProvider).markAllRead();
+                ref.read(latestNewsProvider.notifier).markAllRead();
+                ref.read(featuredNewsProvider.notifier).markAllRead();
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(
                     behavior: SnackBarBehavior.floating,

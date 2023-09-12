@@ -4,24 +4,6 @@ import 'package:forestvpn_test/repositories/news/repositories/repository.dart';
 
 final mockNewsProvider = Provider((ref) => MockNewsRepository());
 
-final featuredArticlesRepositoryProvider = FutureProvider.autoDispose(
-  (ref) async {
-    return Future.delayed(
-      const Duration(seconds: 2),
-      () => MockNewsRepository().getFeaturedArticles(),
-    );
-  },
-);
-
-final latestArticlesRepositoryProvider = FutureProvider.autoDispose(
-  (ref) async {
-    return Future.delayed(
-      const Duration(seconds: 2),
-      () => MockNewsRepository().getLatestArticles(),
-    );
-  },
-);
-
 class MockNewsRepository implements AbstractNewsRepository {
   @override
   Future<List<Article>> getLatestArticles() async {

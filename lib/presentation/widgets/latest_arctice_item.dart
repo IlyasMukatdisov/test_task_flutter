@@ -1,16 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:forestvpn_test/presentation/providers/featured_news_provider.dart';
+import 'package:forestvpn_test/presentation/providers/latest_news_provider.dart';
 import 'package:forestvpn_test/presentation/screens/article_details_screen.dart';
 import 'package:forestvpn_test/presentation/styles/styles.dart';
 import 'package:forestvpn_test/repositories/news/models/article.dart';
 
-class LatestArticleItem extends StatelessWidget {
-  final Article article;
-  const LatestArticleItem({super.key, required this.article});
+class LatestArticleItem extends ConsumerWidget {
+  final String id;
+  const LatestArticleItem({super.key, required this.id});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final article = ref.watch(latestNewsProvider.notifier).getArticle(id);
     return InkWell(
       onTap: () {
+        ref.read(latestNewsProvider.notifier).markRead(article.id);
+        ref.read(featuredNewsProvider.notifier).markRead(article.id);
         Navigator.of(context).pushNamed(
           ArticleDetailsScreen.routeName,
           arguments: {
@@ -20,10 +26,10 @@ class LatestArticleItem extends StatelessWidget {
         );
       },
       child: Container(
-        width: 358,
+        width: double.infinity,
         height: 103,
         decoration: ShapeDecoration(
-          color: Colors.white,
+          color: article.read ? const Color(0xFFF5F5F5) : Colors.white,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(9)),
           shadows: const [
             BoxShadow(
