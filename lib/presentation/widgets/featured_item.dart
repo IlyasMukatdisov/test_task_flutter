@@ -8,17 +8,19 @@ import 'package:forestvpn_test/presentation/styles/styles.dart';
 import 'package:forestvpn_test/repositories/news/models/article.dart';
 
 class FeaturedItem extends ConsumerWidget {
+  final bool isLastIndex;
   final Article article;
 
   const FeaturedItem({
     super.key,
     required this.article,
+    required this.isLastIndex,
   });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final double screenWidth = MediaQuery.of(context).size.width;
-    double itemWidth = screenWidth - 76;
+    double itemWidth = screenWidth - 56;
 
     return InkWell(
       onTap: () {
@@ -32,8 +34,7 @@ class FeaturedItem extends ConsumerWidget {
           },
         );
       },
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 10),
+      child: SizedBox(
         width: itemWidth,
         height: 300,
         child: Stack(

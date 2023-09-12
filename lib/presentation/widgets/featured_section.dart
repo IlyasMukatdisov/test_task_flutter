@@ -12,9 +12,12 @@ class FeaturedSection extends ConsumerStatefulWidget {
 }
 
 class _FeaturedSectionState extends ConsumerState<FeaturedSection> {
+  late final PageController _carouselController;
+
   @override
   void initState() {
     ref.read(featuredNewsProvider.notifier).fetchArticles(context);
+    _carouselController = PageController(initialPage: 0, viewportFraction: 1);
     super.initState();
   }
 
@@ -31,10 +34,12 @@ class _FeaturedSectionState extends ConsumerState<FeaturedSection> {
     return SizedBox(
       height: 300,
       child: PageView.builder(
+        controller: _carouselController,
         itemCount: featuredNews.length,
         itemBuilder: (context, index) {
           final item = featuredNews[index];
           return FeaturedItem(
+            isLastIndex: index == featuredNews.length - 1,
             article: item,
           );
         },

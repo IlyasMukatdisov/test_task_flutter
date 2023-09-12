@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:forestvpn_test/presentation/styles/styles.dart';
 import 'package:forestvpn_test/repositories/news/models/article.dart';
@@ -36,23 +37,15 @@ class ArticleDetailsScreen extends StatelessWidget {
                     top: 0,
                     child: Hero(
                       tag: heroTag,
-                      child: Container(
-                        width: screenWidth,
-                        height: 495,
-                        decoration: ShapeDecoration(
-                          image: DecorationImage(
-                            image: NetworkImage(
-                              article.imageUrl,
-                            ),
-                            colorFilter: ColorFilter.mode(
-                              Colors.black.withOpacity(0.699999988079071),
-                              BlendMode.darken,
-                            ),
-                            fit: BoxFit.cover,
-                          ),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
-                          ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(12),
+                        child: CachedNetworkImage(
+                          width: screenWidth,
+                          height: 495,
+                          fit: BoxFit.cover,
+                          imageUrl: article.imageUrl,
+                          colorBlendMode: BlendMode.darken,
+                          color: Colors.black.withOpacity(0.699999988079071),
                         ),
                       ),
                     ),
